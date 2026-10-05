@@ -1,0 +1,28 @@
+# TurboRUL default configuration. Paths are relative to the repository root.
+
+seed: 42
+seeds: [0, 1, 2, 3, 4]          # deep-model repeat runs (mean ± std)
+
+paths:
+  raw_dir: data/raw
+  processed_dir: data/processed
+  models_dir: models
+  results_csv: results/results.csv
+  mlflow_uri: mlruns
+
+data:
+  subsets: [FD001, FD002, FD003, FD004]
+  primary_subset: FD001
+
+labels:
+  rul_cap: 125                  # piecewise-linear target; null disables the cap
+
+windows:
+  window_len: 30
+
+split:
+  val_fraction: 0.2             # share of training engines held out for validation
+
+tiers:                          # predicted RUL thresholds, in cycles
+  critical: 30                  # RUL <= 30 -> Critical
+  watch: 60                     # 30 < RUL <= 60 -> Watch; above -> Healthy
