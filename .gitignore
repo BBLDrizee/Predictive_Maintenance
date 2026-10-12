@@ -23,3 +23,6 @@ models/*
 Thumbs.db
 .vscode/
 .idea/
+
+# Run logs
+results/logs/

@@ -12,6 +12,37 @@ OP_SETTINGS: list[str] = [f"op_setting_{i}" for i in range(1, 4)]
 SENSORS: list[str] = [f"s{i}" for i in range(1, 22)]
 COLUMNS: list[str] = ["unit", "cycle", *OP_SETTINGS, *SENSORS]
 
+# Symbol and description of each sensor (Saxena et al., PHM08, Table 2).
+SENSOR_INFO: dict[str, tuple[str, str]] = {
+    "s1": ("T2", "Fan inlet temperature"),
+    "s2": ("T24", "LPC outlet temperature"),
+    "s3": ("T30", "HPC outlet temperature"),
+    "s4": ("T50", "LPT outlet temperature"),
+    "s5": ("P2", "Fan inlet pressure"),
+    "s6": ("P15", "Bypass-duct pressure"),
+    "s7": ("P30", "HPC outlet pressure"),
+    "s8": ("Nf", "Physical fan speed"),
+    "s9": ("Nc", "Physical core speed"),
+    "s10": ("epr", "Engine pressure ratio"),
+    "s11": ("Ps30", "HPC outlet static pressure"),
+    "s12": ("phi", "Fuel flow to Ps30 ratio"),
+    "s13": ("NRf", "Corrected fan speed"),
+    "s14": ("NRc", "Corrected core speed"),
+    "s15": ("BPR", "Bypass ratio"),
+    "s16": ("farB", "Burner fuel-air ratio"),
+    "s17": ("htBleed", "Bleed enthalpy"),
+    "s18": ("Nf_dmd", "Demanded fan speed"),
+    "s19": ("PCNfR_dmd", "Demanded corrected fan speed"),
+    "s20": ("W31", "HPT coolant bleed"),
+    "s21": ("W32", "LPT coolant bleed"),
+}
+
+
+def sensor_label(sensor: str) -> str:
+    """'s11' -> 's11 · Ps30 (HPC outlet static pressure)'."""
+    symbol, desc = SENSOR_INFO[sensor]
+    return f"{sensor} · {symbol} ({desc})"
+
 
 @dataclass
 class CMAPSSSubset:

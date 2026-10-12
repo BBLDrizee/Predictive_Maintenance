@@ -1,13 +1,15 @@
 # TurboRUL default configuration. Paths are relative to the repository root.
 
-seed: 42
-seeds: [0, 1, 2, 3, 4]          # deep-model repeat runs (mean ± std)
+seed: 42                        # data split, k-means, validation truncation
+seeds: [0, 1, 2, 3, 4]          # model repeat runs (mean ± std)
 
 paths:
   raw_dir: data/raw
   processed_dir: data/processed
   models_dir: models
   results_csv: results/results.csv
+  predictions_dir: results/predictions
+  params_dir: results/best_params
   mlflow_uri: mlruns
 
 data:
@@ -22,7 +24,53 @@ windows:
 
 split:
   val_fraction: 0.2             # share of training engines held out for validation
+  val_cuts_per_engine: 10       # random truncations per validation engine for test-like scoring
+  val_max_rul: 150              # truncations keep true RUL <= this, like the official test sets (max 145-195)
+
+preprocess:
+  n_conditions: {FD001: 1, FD002: 6, FD003: 1, FD004: 6}
+  trend_threshold: 0.2          # drop sensors whose mean per-engine |Spearman rho| with cycle is below this
 
 tiers:                          # predicted RUL thresholds, in cycles
   critical: 30                  # RUL <= 30 -> Critical
   watch: 60                     # 30 < RUL <= 60 -> Watch; above -> Healthy
+
+# Default hyperparameters; tuned values in paths.params_dir override these.
+models:
+  linear: {}
+  xgb:
+    n_estimators: 2000          # upper bound; early stopping on validation engines picks the count
+    learning_rate: 0.05
+    max_depth: 4
+    min_child_weight: 5
+    subsample: 0.8
+    colsample_bytree: 0.8
+    reg_lambda: 1.0
+    early_stopping_rounds: 100
+  lstm:
+    hidden: 64
+    layers: 2
+    dropout: 0.2
+    lr: 0.001
+    batch_size: 256
+  cnn:
+    channels: 32
+    n_conv: 3
+    kernel: 5
+    dropout: 0.2
+    lr: 0.001
+    batch_size: 256
+
+training:                       # deep models
+  max_epochs: 80
+  patience: 10                  # early stopping on validation-engine windows
+
+tuning:
+  folds: 5                      # engine-level k-fold cross-validation (Phase 4 onward)
+  n_trials: {xgb: 30, lstm: 20, cnn: 20}
+  max_epochs: 30                # shorter budget per deep trial
+  patience: 6
+  train_stride: 2               # deep trials train on every 2nd window (overlapping windows are near-duplicates)
+
+uncertainty:
+  alpha: 0.1                    # 90% prediction ranges

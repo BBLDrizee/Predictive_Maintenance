@@ -1,0 +1,20 @@
+{
+  "subset": "FD001",
+  "model": "xgb",
+  "params": {
+    "window_len": 40,
+    "rul_cap": 135,
+    "n_estimators": 2000,
+    "early_stopping_rounds": 100,
+    "learning_rate": 0.0415951814221145,
+    "max_depth": 5,
+    "min_child_weight": 5,
+    "subsample": 0.5629296160228756,
+    "colsample_bytree": 0.43659504855599107,
+    "reg_lambda": 4.065798329740277
+  },
+  "val_rmse": 14.811946070223042,
+  "n_trials": 40,
+  "n_pruned": 0,
+  "tuning_seconds": 128
+}

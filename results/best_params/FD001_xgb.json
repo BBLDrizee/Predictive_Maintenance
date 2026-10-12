@@ -1,0 +1,28 @@
+{
+  "subset": "FD001",
+  "model": "xgb",
+  "params": {
+    "window_len": 50,
+    "rul_cap": 140,
+    "n_estimators": 2000,
+    "early_stopping_rounds": 100,
+    "learning_rate": 0.01307833701584109,
+    "max_depth": 4,
+    "min_child_weight": 9,
+    "subsample": 0.5032145469944874,
+    "colsample_bytree": 0.9242584500464051,
+    "reg_lambda": 11.079955580914733
+  },
+  "cv_rmse": 14.31256801577428,
+  "cv_fold_rmse": [
+    14.298385952850062,
+    14.265107147811149,
+    14.228336510420503,
+    14.317966399693754,
+    14.453044068095938
+  ],
+  "folds": 5,
+  "n_trials": 30,
+  "n_pruned": 7,
+  "tuning_seconds": 1925
+}

@@ -1,0 +1,9 @@
+# Blue accent: red, amber and green are reserved for risk tiers (PRD §8).
+[theme]
+primaryColor = "#2a78d6"
+backgroundColor = "#ffffff"
+secondaryBackgroundColor = "#f3f4f6"
+textColor = "#1f1f1e"
+
+[browser]
+gatherUsageStats = false

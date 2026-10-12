@@ -1,0 +1,17 @@
+{
+  "subset": "FD001",
+  "model": "lstm",
+  "params": {
+    "window_len": 40,
+    "rul_cap": 125,
+    "hidden": 32,
+    "layers": 1,
+    "dropout": 0.260986369285513,
+    "lr": 0.0012889420238684053,
+    "batch_size": 256
+  },
+  "val_rmse": 14.417949324373588,
+  "n_trials": 25,
+  "n_pruned": 5,
+  "tuning_seconds": 841
+}

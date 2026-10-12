@@ -1,0 +1,18 @@
+{
+  "subset": "FD001",
+  "model": "cnn",
+  "params": {
+    "window_len": 40,
+    "rul_cap": 135,
+    "channels": 16,
+    "n_conv": 4,
+    "kernel": 5,
+    "dropout": 0.13013213230530574,
+    "lr": 0.0008954186075213084,
+    "batch_size": 256
+  },
+  "val_rmse": 15.564499814050833,
+  "n_trials": 25,
+  "n_pruned": 5,
+  "tuning_seconds": 375
+}
