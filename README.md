@@ -5,7 +5,8 @@ risk tiers, sensor-level explanations, a REST API and a maintenance-planning das
 scope and plan.
 
 > Work in progress: Phases 1–5 are done (data, baselines, deep models, all four subsets, uncertainty, explanations,
-> API, dashboard). Progress reports: [reports/](reports/).
+> API, dashboard). Progress reports: [reports/](reports/). Code walkthrough and demo script:
+> [docs/WALKTHROUGH.md](docs/WALKTHROUGH.md).
 
 ## Setup
 
